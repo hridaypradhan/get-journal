@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.get_journal">
    <application
-        android:label="get_journal"
+        android:label="Get Journal"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

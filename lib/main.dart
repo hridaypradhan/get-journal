@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_journal/home/home_screen.dart';
 
 void main() => runApp(const GetJournal());
 
@@ -8,15 +9,11 @@ class GetJournal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Material App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Material App Bar'),
-        ),
-        body: const Center(
-          child: Text('Hello World'),
-        ),
-      ),
+      debugShowCheckedModeBanner: false,
+      initialRoute: HomeScreen.id,
+      routes: {
+        HomeScreen.id: (context) => const HomeScreen(),
+      },
     );
   }
 }
