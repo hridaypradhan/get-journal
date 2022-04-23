@@ -14,14 +14,15 @@ class GetJournal extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        fontFamily: GoogleFonts.montserrat().fontFamily,
         primaryColor: kPrimaryBlue,
         colorScheme: Theme.of(context).colorScheme.copyWith(
               secondary: kPrimaryBlue,
             ),
+        textTheme:
+            GoogleFonts.montserratTextTheme().apply(bodyColor: kPrimaryBlue),
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: HomeScreen.id,
+      initialRoute: LandingScreen.id,
       routes: {
         HomeScreen.id: (context) => const HomeScreen(),
         LandingScreen.id: (context) => const LandingScreen(),

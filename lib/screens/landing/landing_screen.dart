@@ -1,13 +1,140 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_swipe_button/flutter_swipe_button.dart';
+import 'package:get_journal/global/widgets/gradient_scaffold.dart';
+import 'package:get_journal/screens/landing/widgets/sign_in_button.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class LandingScreen extends StatelessWidget {
+import '../../global/constants/colors.dart';
+import '../../global/utilities/size_helper.dart';
+
+class LandingScreen extends StatefulWidget {
   static const id = '/landing_screen';
   const LandingScreen({Key? key}) : super(key: key);
 
   @override
+  State<LandingScreen> createState() => _LandingScreenState();
+}
+
+class _LandingScreenState extends State<LandingScreen> {
+  late Widget _toDisplay;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _toDisplay = Column(
+      key: const ValueKey<int>(1),
+      children: [
+        SizedBox(
+          height: 100.0,
+          width: 300.0,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              DefaultTextStyle(
+                style: TextStyle(
+                  fontSize: 45.0,
+                  fontFamily: GoogleFonts.spartan().fontFamily,
+                  fontWeight: FontWeight.bold,
+                ),
+                child: AnimatedTextKit(
+                  pause: const Duration(milliseconds: 100),
+                  repeatForever: true,
+                  animatedTexts: [
+                    RotateAnimatedText('Find'),
+                    RotateAnimatedText('Read'),
+                    RotateAnimatedText('Save'),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 10.0),
+              const Text(
+                'papers.',
+                style: TextStyle(
+                  fontSize: 45.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const Text(
+          'All in one place.',
+          style: TextStyle(
+            fontSize: 45.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 80.0),
+        SwipeButton(
+          activeTrackColor: Colors.white.withOpacity(0.4),
+          elevation: 5.0,
+          height: 60.0,
+          activeThumbColor: kPrimaryBlue,
+          thumb: const Icon(
+            Icons.chevron_right,
+            color: Colors.white,
+            size: 45.0,
+          ),
+          width: SizeHelper(context).width * 0.75,
+          child: const Text(
+            'Start your research',
+            style: TextStyle(fontSize: 18.0),
+          ),
+          onSwipe: () {
+            setState(
+              () {
+                _toDisplay = Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  key: const ValueKey<int>(2),
+                  children: const [
+                    // TODO Replace with app icon
+                    Icon(
+                      Icons.book,
+                      size: 45.0,
+                    ),
+                    SizedBox(height: 30.0),
+                    Text(
+                      'Get Journal',
+                      style: TextStyle(
+                        fontSize: 45.0,
+                      ),
+                    ),
+                    SizedBox(height: 30.0),
+                    SignInButton(),
+                  ],
+                );
+              },
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      
+    return GradientScaffold(
+      body: Column(
+        children: [
+          // TODO Replace with image
+          const Icon(
+            Icons.help,
+            size: 400.0,
+          ),
+          const SizedBox(height: 20.0),
+          AnimatedSwitcher(
+            transitionBuilder: (child, animation) => ScaleTransition(
+              child: child,
+              scale: animation,
+            ),
+            duration: const Duration(
+              milliseconds: 500,
+            ),
+            child: _toDisplay,
+          ),
+        ],
+      ),
     );
   }
 }
