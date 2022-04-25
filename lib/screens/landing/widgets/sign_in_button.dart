@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
-import 'package:get_journal/global/constants/colors.dart';
-import 'package:get_journal/global/utilities/size_helper.dart';
+
+import '../../../global/constants/colors.dart';
+import '../../../global/utilities/size_helper.dart';
 
 class SignInButton extends StatelessWidget {
   const SignInButton({Key? key}) : super(key: key);
@@ -10,7 +11,7 @@ class SignInButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Bounce(
       duration: const Duration(
-        seconds: 1,
+        milliseconds: 700,
       ),
       onPressed: () {},
       child: Container(

@@ -1,8 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swipe_button/flutter_swipe_button.dart';
-import 'package:get_journal/global/widgets/gradient_scaffold.dart';
-import 'package:get_journal/screens/landing/widgets/sign_in_button.dart';
+import 'widgets/sign_in_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../global/constants/colors.dart';
@@ -10,6 +9,7 @@ import '../../global/utilities/size_helper.dart';
 
 class LandingScreen extends StatefulWidget {
   static const id = '/landing_screen';
+
   const LandingScreen({Key? key}) : super(key: key);
 
   @override
@@ -25,8 +25,10 @@ class _LandingScreenState extends State<LandingScreen> {
     _toDisplay = Column(
       key: const ValueKey<int>(1),
       children: [
+        const SizedBox(height: 40.0),
         SizedBox(
-          height: 100.0,
+          // Remove hardcoded values
+          height: 60.0,
           width: 300.0,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -85,23 +87,22 @@ class _LandingScreenState extends State<LandingScreen> {
             setState(
               () {
                 _toDisplay = Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   key: const ValueKey<int>(2),
-                  children: const [
-                    // TODO Replace with app icon
-                    Icon(
-                      Icons.book,
-                      size: 45.0,
+                  children: [
+                    const SizedBox(height: 20.0),
+                    Image.asset(
+                      'images/app_icon.png',
+                      width: SizeHelper(context).width * 0.2,
                     ),
-                    SizedBox(height: 30.0),
-                    Text(
-                      'Get Journal',
+                    const SizedBox(height: 10.0),
+                    const Text(
+                      'GetJournal',
                       style: TextStyle(
                         fontSize: 45.0,
                       ),
                     ),
-                    SizedBox(height: 30.0),
-                    SignInButton(),
+                    const SizedBox(height: 30.0),
+                    const SignInButton(),
                   ],
                 );
               },
@@ -114,26 +115,29 @@ class _LandingScreenState extends State<LandingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GradientScaffold(
-      body: Column(
-        children: [
-          // TODO Replace with image
-          const Icon(
-            Icons.help,
-            size: 400.0,
+    return Container(
+      decoration: const BoxDecoration(gradient: kPrimaryGradient),
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Column(
+            children: [
+              const SizedBox(height: 20.0),
+              Image.asset('images/landing_page_image.png'),
+              const SizedBox(height: 20.0),
+              AnimatedSwitcher(
+                transitionBuilder: (child, animation) => ScaleTransition(
+                  child: child,
+                  scale: animation,
+                ),
+                duration: const Duration(
+                  milliseconds: 500,
+                ),
+                child: _toDisplay,
+              ),
+            ],
           ),
-          const SizedBox(height: 20.0),
-          AnimatedSwitcher(
-            transitionBuilder: (child, animation) => ScaleTransition(
-              child: child,
-              scale: animation,
-            ),
-            duration: const Duration(
-              milliseconds: 500,
-            ),
-            child: _toDisplay,
-          ),
-        ],
+        ),
       ),
     );
   }

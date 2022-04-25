@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get_journal/global/widgets/gradient_scaffold.dart';
 
 class HomeScreen extends StatelessWidget {
   static const id = '/home_screen';
@@ -8,10 +7,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GradientScaffold(
-      body: Center(
-        child: Text('Home Screen'),
-      ),
+    return const Center(
+      child: Text('Home'),
     );
   }
 }
