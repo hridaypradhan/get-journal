@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 import 'global/constants/colors.dart';
 import 'screens/base/base_screen.dart';
 import 'screens/landing/landing_screen.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-import 'screens/home/home_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +27,7 @@ class GetJournal extends StatelessWidget {
             GoogleFonts.montserratTextTheme().apply(bodyColor: kPrimaryBlue),
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: BaseScreen.id,
+      initialRoute: LandingScreen.id,
       routes: {
         LandingScreen.id: (context) => const LandingScreen(),
         BaseScreen.id: (context) => BaseScreen(),

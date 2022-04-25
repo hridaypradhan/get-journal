@@ -27,7 +27,7 @@ class _LandingScreenState extends State<LandingScreen> {
       children: [
         const SizedBox(height: 40.0),
         SizedBox(
-          // Remove hardcoded values
+          // TODO Remove hardcoded values
           height: 60.0,
           width: 300.0,
           child: Row(

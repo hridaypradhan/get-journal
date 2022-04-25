@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
+import '../../base/base_screen.dart';
 
 import '../../../global/constants/colors.dart';
 import '../../../global/utilities/size_helper.dart';
@@ -13,7 +14,10 @@ class SignInButton extends StatelessWidget {
       duration: const Duration(
         milliseconds: 700,
       ),
-      onPressed: () {},
+      onPressed: () {
+        // TODO Implement sign-in logic
+        Navigator.popAndPushNamed(context, BaseScreen.id);
+      },
       child: Container(
         width: SizeHelper(context).width * 0.75,
         padding: const EdgeInsets.all(15.0),

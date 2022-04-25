@@ -1,10 +1,10 @@
 import 'package:bottom_bar/bottom_bar.dart';
 import 'package:flutter/material.dart';
+
+import '../../global/constants/colors.dart';
 import '../home/home_screen.dart';
 import '../profile/profile_screen.dart';
 import '../search/search_screen.dart';
-
-import '../../global/constants/colors.dart';
 
 class BaseScreen extends StatefulWidget {
   static const id = '/base_screen';
@@ -34,19 +34,28 @@ class _BaseScreenState extends State<BaseScreen> {
             backgroundColor: kPrimaryBlue,
             items: [
               BottomBarItem(
-                icon: const Icon(Icons.home),
+                icon: const Icon(
+                  Icons.home,
+                  size: 30.0,
+                ),
                 title: const Text('Home'),
                 activeColor: Colors.white,
                 inactiveColor: Colors.white,
               ),
               BottomBarItem(
-                icon: const Icon(Icons.search),
+                icon: const Icon(
+                  Icons.search,
+                  size: 30.0,
+                ),
                 title: const Text('Search'),
                 activeColor: Colors.white,
                 inactiveColor: Colors.white,
               ),
               BottomBarItem(
-                icon: const Icon(Icons.person),
+                icon: const Icon(
+                  Icons.person,
+                  size: 30.0,
+                ),
                 title: const Text('Profile'),
                 activeColor: Colors.white,
                 inactiveColor: Colors.white,
