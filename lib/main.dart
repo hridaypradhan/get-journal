@@ -19,6 +19,10 @@ class GetJournal extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: kPrimaryBlue,
+          selectionColor: kLightBlue,
+        ),
         primaryColor: kPrimaryBlue,
         colorScheme: Theme.of(context).colorScheme.copyWith(
               secondary: kPrimaryBlue,

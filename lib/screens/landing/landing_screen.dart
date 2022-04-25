@@ -1,11 +1,11 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swipe_button/flutter_swipe_button.dart';
-import 'widgets/sign_in_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../global/constants/colors.dart';
 import '../../global/utilities/size_helper.dart';
+import 'widgets/sign_in_button.dart';
 
 class LandingScreen extends StatefulWidget {
   static const id = '/landing_screen';
@@ -89,7 +89,7 @@ class _LandingScreenState extends State<LandingScreen> {
                 _toDisplay = Column(
                   key: const ValueKey<int>(2),
                   children: [
-                    const SizedBox(height: 20.0),
+                    const SizedBox(height: 40.0),
                     Image.asset(
                       'images/app_icon.png',
                       width: SizeHelper(context).width * 0.2,
@@ -121,9 +121,14 @@ class _LandingScreenState extends State<LandingScreen> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           body: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               const SizedBox(height: 20.0),
-              Image.asset('images/landing_page_image.png'),
+              Image.asset(
+                'images/landing_page_image.png',
+                height: SizeHelper(context).height * 0.4,
+              ),
               const SizedBox(height: 20.0),
               AnimatedSwitcher(
                 transitionBuilder: (child, animation) => ScaleTransition(

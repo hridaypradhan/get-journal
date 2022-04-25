@@ -10,7 +10,6 @@ class BaseScreen extends StatefulWidget {
   static const id = '/base_screen';
   final List<Widget> pages = [
     const HomeScreen(),
-    const SearchScreen(),
     const ProfileScreen(),
   ];
 
@@ -62,16 +61,45 @@ class _BaseScreenState extends State<BaseScreen> {
               ),
             ],
             onTap: (index) {
-              setState(
-                () {
-                  _selectedIndex = index;
-                  _pageController.animateToPage(
-                    index,
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.linear,
-                  );
-                },
-              );
+              if (index != 1) {
+                setState(
+                  () {
+                    _selectedIndex = index;
+                    _pageController.animateToPage(
+                      index,
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.linear,
+                    );
+                  },
+                );
+              } else {
+                setState(
+                  () {
+                    _selectedIndex = index;
+                  },
+                );
+                showModalBottomSheet(
+                  enableDrag: false,
+                  isDismissible: false,
+                  isScrollControlled: true,
+                  backgroundColor: Colors.transparent,
+                  context: context,
+                  builder: (context) => SearchScreen(
+                    onPop: () {
+                      setState(
+                        () {
+                          _selectedIndex = 0;
+                          _pageController.animateToPage(
+                            0,
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.linear,
+                          );
+                        },
+                      );
+                    },
+                  ),
+                );
+              }
             },
             selectedIndex: _selectedIndex,
           ),

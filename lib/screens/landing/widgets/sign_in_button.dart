@@ -12,7 +12,7 @@ class SignInButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Bounce(
       duration: const Duration(
-        milliseconds: 700,
+        milliseconds: 200,
       ),
       onPressed: () {
         // TODO Implement sign-in logic

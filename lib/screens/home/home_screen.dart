@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../models/paper.dart';
 import 'widgets/paper_widget.dart';
 
@@ -42,11 +43,26 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: dummyPapers.length,
-      itemBuilder: (context, index) => PaperWidget(
-        paper: dummyPapers[index],
-      ),
+    return Column(
+      children: [
+        const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text(
+            'Home',
+            style: TextStyle(
+              fontSize: 40.0,
+            ),
+          ),
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemCount: dummyPapers.length,
+            itemBuilder: (context, index) => PaperWidget(
+              paper: dummyPapers[index],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
