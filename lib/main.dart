@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,9 +7,10 @@ import 'global/constants/colors.dart';
 import 'screens/base/base_screen.dart';
 import 'screens/landing/landing_screen.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+  await Firebase.initializeApp();
   runApp(const GetJournal());
 }
 

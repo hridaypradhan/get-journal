@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
+import '../../../services/auth_service.dart';
 import '../../base/base_screen.dart';
 
 import '../../../global/constants/colors.dart';
 import '../../../global/utilities/size_helper.dart';
 
 class SignInButton extends StatelessWidget {
-  const SignInButton({Key? key}) : super(key: key);
+  final AuthService _authService = AuthService();
+  SignInButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +16,15 @@ class SignInButton extends StatelessWidget {
       duration: const Duration(
         milliseconds: 200,
       ),
-      onPressed: () {
-        // TODO Implement sign-in logic
-        Navigator.popAndPushNamed(context, BaseScreen.id);
+      onPressed: () async {
+        _authService.signInWithGoogle(() {}).then(
+          (loggedInUser) {
+            if (loggedInUser.user != null) {
+              _authService.writeUserData();
+              Navigator.popAndPushNamed(context, BaseScreen.id);
+            }
+          },
+        );
       },
       child: Container(
         width: SizeHelper(context).width * 0.75,

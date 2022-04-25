@@ -1,6 +1,8 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swipe_button/flutter_swipe_button.dart';
+import '../base/base_screen.dart';
+import '../../services/auth_service.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../global/constants/colors.dart';
@@ -84,29 +86,33 @@ class _LandingScreenState extends State<LandingScreen> {
             style: TextStyle(fontSize: 18.0),
           ),
           onSwipe: () {
-            setState(
-              () {
-                _toDisplay = Column(
-                  key: const ValueKey<int>(2),
-                  children: [
-                    const SizedBox(height: 40.0),
-                    Image.asset(
-                      'images/app_icon.png',
-                      width: SizeHelper(context).width * 0.2,
-                    ),
-                    const SizedBox(height: 10.0),
-                    const Text(
-                      'GetJournal',
-                      style: TextStyle(
-                        fontSize: 45.0,
+            if (AuthService.signedIn()) {
+              Navigator.popAndPushNamed(context, BaseScreen.id);
+            } else {
+              setState(
+                () {
+                  _toDisplay = Column(
+                    key: const ValueKey<int>(2),
+                    children: [
+                      const SizedBox(height: 40.0),
+                      Image.asset(
+                        'images/app_icon.png',
+                        width: SizeHelper(context).width * 0.2,
                       ),
-                    ),
-                    const SizedBox(height: 30.0),
-                    const SignInButton(),
-                  ],
-                );
-              },
-            );
+                      const SizedBox(height: 10.0),
+                      const Text(
+                        'GetJournal',
+                        style: TextStyle(
+                          fontSize: 45.0,
+                        ),
+                      ),
+                      const SizedBox(height: 30.0),
+                      SignInButton(),
+                    ],
+                  );
+                },
+              );
+            }
           },
         ),
       ],
