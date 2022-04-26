@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_journal/global/constants/colors.dart';
 
 import '../../models/paper.dart';
 import 'widgets/paper_widget.dart';
@@ -53,6 +54,11 @@ class HomeScreen extends StatelessWidget {
               fontSize: 40.0,
             ),
           ),
+        ),
+        const Divider(
+          indent: 15.0,
+          endIndent: 15.0,
+          color: kPrimaryBlue,
         ),
         Expanded(
           child: ListView.builder(
