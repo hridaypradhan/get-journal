@@ -6,6 +6,8 @@ class AuthService {
   static final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  static User? get currentUser => _auth.currentUser;
+
   static bool signedIn() {
     return _auth.currentUser != null;
   }
