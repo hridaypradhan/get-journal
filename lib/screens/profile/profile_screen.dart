@@ -24,6 +24,7 @@ class ProfileScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     CircleAvatar(
+                      backgroundColor: Colors.transparent,
                       radius: 45.0,
                       backgroundImage:
                           NetworkImage(AuthService.currentUser?.photoURL ?? ''),

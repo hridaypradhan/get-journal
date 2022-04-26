@@ -9,15 +9,15 @@ class BookmarkSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var bookmarkProvider = Provider.of<PaperProvider>(context);
+    var paperProvider = Provider.of<PaperProvider>(context);
 
     return CupertinoSwitch(
       thumbColor: kLightGreen,
       trackColor: kPrimaryBlue.withOpacity(0.7),
       activeColor: kPrimaryBlue,
-      value: bookmarkProvider.bookmarksOn,
+      value: paperProvider.bookmarksOn,
       onChanged: (value) {
-        bookmarkProvider.setBookmarkVisibility(value);
+        paperProvider.setBookmarkVisibility(value);
       },
     );
   }

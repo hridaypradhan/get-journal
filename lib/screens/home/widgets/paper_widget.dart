@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../../global/utilities/size_helper.dart';
-import '../../paper_view/paper_view_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../../global/constants/colors.dart';
+import '../../../global/utilities/size_helper.dart';
 import '../../../models/paper.dart';
 import '../../../providers/paper_provider.dart';
+import '../../paper_view/paper_view_screen.dart';
 
 class PaperWidget extends StatelessWidget {
   final Paper paper;
@@ -69,7 +69,11 @@ class PaperWidget extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      paperProvider.checkIfBookmarked(paper)
+                          ? await paperProvider.unbookmarkPaper(paper)
+                          : await paperProvider.bookmarkPaper(paper);
+                    },
                     icon: Icon(
                       paperProvider.checkIfBookmarked(paper)
                           ? Icons.bookmark_added

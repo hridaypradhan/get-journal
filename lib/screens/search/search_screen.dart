@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../providers/paper_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../global/constants/colors.dart';
+import '../../providers/paper_provider.dart';
 
 class SearchScreen extends StatefulWidget {
   final Function onPop;
@@ -59,6 +59,10 @@ class _SearchScreenState extends State<SearchScreen> {
                 TextField(
                   autofocus: true,
                   controller: _searchController,
+                  textCapitalization: TextCapitalization.words,
+                  style: const TextStyle(
+                    fontSize: 20.0,
+                  ),
                   decoration: InputDecoration(
                     hintText: 'Search by author or title',
                     hintStyle: const TextStyle(
@@ -66,10 +70,14 @@ class _SearchScreenState extends State<SearchScreen> {
                       color: kPrimaryBlue,
                     ),
                     icon: IconButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_searchController.text.isNotEmpty) {
-                          paperProvider
+                          await paperProvider
                               .searchForPapers(_searchController.text.trim());
+                          if (paperProvider.searchResults.isNotEmpty) {
+                            Navigator.pop(context);
+                            widget.onPop(true);
+                          }
                         }
                       },
                       icon: const Icon(

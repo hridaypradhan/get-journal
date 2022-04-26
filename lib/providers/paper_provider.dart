@@ -1,23 +1,36 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../services/paper_service.dart';
 
 import '../models/paper.dart';
+import '../services/paper_service.dart';
 
 class PaperProvider extends ChangeNotifier {
   final PaperService _paperService = PaperService();
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   List<Paper> _searchResults = [], _bookmarkedPapers = [];
   bool _bookmarksOn = false;
 
   checkIfBookmarked(Paper paper) {
     for (Paper bookmark in _bookmarkedPapers) {
-      if (paper.pdfLink == bookmark.pdfLink) {
+      if (paper.id == bookmark.id) {
         return true;
       }
     }
     return false;
+  }
+
+  bookmarkPaper(Paper paper) async {
+    await _paperService.bookmarkPaper(paper);
+    await updateBookmarks();
+  }
+
+  unbookmarkPaper(Paper paper) async {
+    await _paperService.unbookmarkPaper(paper);
+    await updateBookmarks();
+  }
+
+  updateBookmarks() async {
+    _bookmarkedPapers = await _paperService.getBookmarks();
+    notifyListeners();
   }
 
   searchForPapers(String query) async {
@@ -26,8 +39,11 @@ class PaperProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setBookmarkVisibility(bool newValue) {
+  void setBookmarkVisibility(bool newValue) async {
     _bookmarksOn = newValue;
+    if (_bookmarksOn) {
+      await updateBookmarks();
+    }
     notifyListeners();
   }
 
