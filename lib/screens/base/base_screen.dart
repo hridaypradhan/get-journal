@@ -85,17 +85,19 @@ class _BaseScreenState extends State<BaseScreen> {
                   backgroundColor: Colors.transparent,
                   context: context,
                   builder: (context) => SearchScreen(
-                    onPop: () {
-                      setState(
-                        () {
-                          _selectedIndex = 0;
-                          _pageController.animateToPage(
-                            0,
-                            duration: const Duration(milliseconds: 500),
-                            curve: Curves.linear,
-                          );
-                        },
-                      );
+                    onPop: (bool searched) {
+                      if (searched) {
+                        setState(
+                          () {
+                            _selectedIndex = 0;
+                            _pageController.animateToPage(
+                              0,
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.linear,
+                            );
+                          },
+                        );
+                      }
                     },
                   ),
                 );

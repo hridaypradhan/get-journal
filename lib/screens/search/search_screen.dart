@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../providers/paper_provider.dart';
+import 'package:provider/provider.dart';
+
 import '../../global/constants/colors.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -29,12 +32,14 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    PaperProvider paperProvider = Provider.of<PaperProvider>(context);
+
     return Container(
       child: Column(
         children: [
           IconButton(
             onPressed: () {
-              widget.onPop();
+              widget.onPop(false);
               Navigator.pop(context);
             },
             icon: const Icon(
@@ -49,24 +54,36 @@ class _SearchScreenState extends State<SearchScreen> {
               borderRadius: BorderRadius.circular(15.0),
               color: Colors.white,
             ),
-            child: TextField(
-              autofocus: true,
-              controller: _searchController,
-              decoration: const InputDecoration(
-                hintText: 'Search by author or title',
-                hintStyle: TextStyle(
-                  fontSize: 20.0,
-                  color: kPrimaryBlue,
+            child: Column(
+              children: [
+                TextField(
+                  autofocus: true,
+                  controller: _searchController,
+                  decoration: InputDecoration(
+                    hintText: 'Search by author or title',
+                    hintStyle: const TextStyle(
+                      fontSize: 20.0,
+                      color: kPrimaryBlue,
+                    ),
+                    icon: IconButton(
+                      onPressed: () {
+                        if (_searchController.text.isNotEmpty) {
+                          paperProvider
+                              .searchForPapers(_searchController.text.trim());
+                        }
+                      },
+                      icon: const Icon(
+                        Icons.search,
+                        color: kPrimaryBlue,
+                      ),
+                    ),
+                    enabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                  ),
                 ),
-                icon: Icon(
-                  Icons.search,
-                  color: kPrimaryBlue,
-                ),
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                disabledBorder: InputBorder.none,
-                errorBorder: InputBorder.none,
-              ),
+              ],
             ),
           ),
         ],

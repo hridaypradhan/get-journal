@@ -1,27 +1,28 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:webfeed/domain/atom_item.dart';
 
 class Paper {
   String title;
   List<String> authors;
-  bool saved;
-  
+  String pdfLink;
+
   Paper({
     required this.title,
     required this.authors,
-    required this.saved,
+    required this.pdfLink,
   });
 
   Paper copyWith({
     String? title,
     List<String>? authors,
-    bool? saved,
+    String? pdfLink,
   }) {
     return Paper(
       title: title ?? this.title,
       authors: authors ?? this.authors,
-      saved: saved ?? this.saved,
+      pdfLink: pdfLink ?? this.pdfLink,
     );
   }
 
@@ -29,7 +30,7 @@ class Paper {
     return {
       'title': title,
       'authors': authors,
-      'saved': saved,
+      'pdfLink': pdfLink,
     };
   }
 
@@ -37,7 +38,16 @@ class Paper {
     return Paper(
       title: map['title'] ?? '',
       authors: List<String>.from(map['authors']),
-      saved: map['saved'] ?? false,
+      pdfLink: map['pdfLink'] ?? '',
+    );
+  }
+
+  factory Paper.fromAtomItem(AtomItem atomItem) {
+    return Paper(
+      title: atomItem.title ?? 'Title',
+      pdfLink: atomItem.links?.first.href?.replaceFirst('abs', 'pdf') ??
+          'google.com',
+      authors: atomItem.authors?.map((e) => e.name ?? 'Author').toList() ?? [],
     );
   }
 
@@ -46,7 +56,8 @@ class Paper {
   factory Paper.fromJson(String source) => Paper.fromMap(json.decode(source));
 
   @override
-  String toString() => 'Paper(title: $title, authors: $authors, saved: $saved)';
+  String toString() =>
+      'Paper(title: $title, authors: $authors, pdfLink: $pdfLink)';
 
   @override
   bool operator ==(Object other) {
@@ -55,9 +66,9 @@ class Paper {
     return other is Paper &&
         other.title == title &&
         listEquals(other.authors, authors) &&
-        other.saved == saved;
+        other.pdfLink == pdfLink;
   }
 
   @override
-  int get hashCode => title.hashCode ^ authors.hashCode ^ saved.hashCode;
+  int get hashCode => title.hashCode ^ authors.hashCode ^ pdfLink.hashCode;
 }

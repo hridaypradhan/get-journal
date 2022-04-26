@@ -1,41 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import '../../global/constants/colors.dart';
-
-import '../../models/paper.dart';
+import '../../providers/paper_provider.dart';
 import 'widgets/paper_widget.dart';
-
-List<Paper> dummyPapers = [
-  Paper(
-    authors: ['Hriday Pradhan', 'Shivam Khanna'],
-    title: 'The Unbearable Lightness of Being',
-    saved: false,
-  ),
-  Paper(
-    authors: ['Hriday Pradhan', 'Shivam Khanna'],
-    title: 'Fasta Reader',
-    saved: false,
-  ),
-  Paper(
-    authors: ['Hriday Pradhan', 'Shivam Khanna'],
-    title: 'Fasta Reader',
-    saved: false,
-  ),
-  Paper(
-    authors: ['Hriday Pradhan', 'Shivam Khanna'],
-    title: 'Fasta Reader',
-    saved: false,
-  ),
-  Paper(
-    authors: ['Hriday Pradhan', 'Shivam Khanna'],
-    title: 'Fasta Reader',
-    saved: false,
-  ),
-  Paper(
-    authors: ['Hriday Pradhan', 'Shivam Khanna'],
-    title: 'Fasta Reader',
-    saved: false,
-  ),
-];
 
 class HomeScreen extends StatelessWidget {
   static const id = '/home_screen';
@@ -44,6 +12,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    PaperProvider paperProvider = Provider.of<PaperProvider>(context);
+
     return Column(
       children: [
         const Padding(
@@ -61,11 +31,42 @@ class HomeScreen extends StatelessWidget {
           color: kPrimaryBlue,
         ),
         Expanded(
-          child: ListView.builder(
-            itemCount: dummyPapers.length,
-            itemBuilder: (context, index) => PaperWidget(
-              paper: dummyPapers[index],
-            ),
+          child: Builder(
+            builder: (context) {
+              if (paperProvider.bookmarksOn) {
+                return paperProvider.bookmarkedPapers.isEmpty
+                    ? const Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(15.0),
+                          child: Text(
+                            'You haven\'t bookmarked any papers',
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      )
+                    : ListView.builder(
+                        itemCount: paperProvider.bookmarkedPapers.length,
+                        itemBuilder: (context, index) => PaperWidget(
+                            paper: paperProvider.bookmarkedPapers[index]),
+                      );
+              } else {
+                return paperProvider.searchResults.isEmpty
+                    ? const Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(15.0),
+                          child: Text(
+                            'Your search came up empty or your internet connection is poor',
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      )
+                    : ListView.builder(
+                        itemCount: paperProvider.searchResults.length,
+                        itemBuilder: (context, index) => PaperWidget(
+                            paper: paperProvider.searchResults[index]),
+                      );
+              }
+            },
           ),
         ),
       ],

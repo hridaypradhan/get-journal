@@ -1,11 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'providers/bookmark_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'global/constants/colors.dart';
+import 'providers/paper_provider.dart';
 import 'screens/base/base_screen.dart';
 import 'screens/landing/landing_screen.dart';
 
@@ -22,12 +22,8 @@ class GetJournal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => BookmarkProvider(),
-        ),
-      ],
+    return ChangeNotifierProvider(
+      create: (context) => PaperProvider(),
       child: MaterialApp(
         theme: ThemeData(
           textSelectionTheme: const TextSelectionThemeData(

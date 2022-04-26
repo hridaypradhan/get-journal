@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
-import '../../../providers/bookmark_provider.dart';
 import 'package:provider/provider.dart';
+
 import '../../../global/constants/colors.dart';
+import '../../../providers/paper_provider.dart';
 
 class BookmarkSwitch extends StatelessWidget {
   const BookmarkSwitch({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var bookmarkProvider = Provider.of<BookmarkProvider>(context);
+    var bookmarkProvider = Provider.of<PaperProvider>(context);
 
     return CupertinoSwitch(
       thumbColor: kLightGreen,

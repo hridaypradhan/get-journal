@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../../global/constants/colors.dart';
+import '../../../global/utilities/size_helper.dart';
+import '../../paper_view/paper_view_screen.dart';
+import 'package:provider/provider.dart';
 
+import '../../../global/constants/colors.dart';
 import '../../../models/paper.dart';
+import '../../../providers/paper_provider.dart';
 
 class PaperWidget extends StatelessWidget {
   final Paper paper;
@@ -12,6 +16,8 @@ class PaperWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    PaperProvider paperProvider = Provider.of<PaperProvider>(context);
+
     return Container(
       margin: const EdgeInsets.all(10.0),
       padding: const EdgeInsets.all(10.0),
@@ -35,16 +41,44 @@ class PaperWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(_getAuthors(paper.authors)),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  !paper.saved
-                      ? Icons.bookmark_add_outlined
-                      : Icons.bookmark_added,
-                  size: 35.0,
-                  color: kLightGreen,
+              Tooltip(
+                message: _getAuthors(paper.authors),
+                child: SizedBox(
+                  width: SizeHelper(context).width * 0.6,
+                  child: Text(
+                    _getAuthors(paper.authors),
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
+              ),
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PaperViewScreen(
+                          pdfLink: paper.pdfLink,
+                        ),
+                      ),
+                    ),
+                    icon: const Icon(
+                      Icons.picture_as_pdf,
+                      size: 35.0,
+                      color: kLightGreen,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      paperProvider.checkIfBookmarked(paper)
+                          ? Icons.bookmark_added
+                          : Icons.bookmark_add_outlined,
+                      size: 35.0,
+                      color: kLightGreen,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
