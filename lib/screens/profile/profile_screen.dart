@@ -83,6 +83,11 @@ class ProfileScreen extends StatelessWidget {
               ),
             ],
           ),
+          const Divider(
+            color: kPrimaryBlue,
+            thickness: 1.5,
+            height: 0,
+          ),
           ProfileAction(
             leadingIcon: Icons.pie_chart,
             trailingIcon: const Icon(
