@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+
 import '../../global/constants/colors.dart';
+import '../../services/auth_service.dart';
+import '../landing/landing_screen.dart';
 import 'widgets/bookmark_switch.dart';
 import 'widgets/profile_action.dart';
-import '../../services/auth_service.dart';
-
-import '../landing/landing_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);

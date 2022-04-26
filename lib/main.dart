@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'providers/bookmark_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import 'global/constants/colors.dart';
 import 'screens/base/base_screen.dart';
@@ -20,25 +22,32 @@ class GetJournal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        textSelectionTheme: const TextSelectionThemeData(
-          cursorColor: kPrimaryBlue,
-          selectionColor: kLightBlue,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => BookmarkProvider(),
         ),
-        primaryColor: kPrimaryBlue,
-        colorScheme: Theme.of(context).colorScheme.copyWith(
-              secondary: kPrimaryBlue,
-            ),
-        textTheme:
-            GoogleFonts.montserratTextTheme().apply(bodyColor: kPrimaryBlue),
+      ],
+      child: MaterialApp(
+        theme: ThemeData(
+          textSelectionTheme: const TextSelectionThemeData(
+            cursorColor: kPrimaryBlue,
+            selectionColor: kLightBlue,
+          ),
+          primaryColor: kPrimaryBlue,
+          colorScheme: Theme.of(context).colorScheme.copyWith(
+                secondary: kPrimaryBlue,
+              ),
+          textTheme:
+              GoogleFonts.montserratTextTheme().apply(bodyColor: kPrimaryBlue),
+        ),
+        debugShowCheckedModeBanner: false,
+        initialRoute: LandingScreen.id,
+        routes: {
+          LandingScreen.id: (context) => const LandingScreen(),
+          BaseScreen.id: (context) => BaseScreen(),
+        },
       ),
-      debugShowCheckedModeBanner: false,
-      initialRoute: LandingScreen.id,
-      routes: {
-        LandingScreen.id: (context) => const LandingScreen(),
-        BaseScreen.id: (context) => BaseScreen(),
-      },
     );
   }
 }

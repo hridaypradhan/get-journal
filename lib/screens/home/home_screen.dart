@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get_journal/global/constants/colors.dart';
+import '../../global/constants/colors.dart';
 
 import '../../models/paper.dart';
 import 'widgets/paper_widget.dart';
