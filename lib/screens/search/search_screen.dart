@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_journal/global/widgets/reusable_button.dart';
 import 'package:provider/provider.dart';
 
 import '../../global/constants/colors.dart';
@@ -17,6 +18,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   late TextEditingController _searchController;
+  bool _searching = false;
 
   @override
   void initState() {
@@ -63,27 +65,15 @@ class _SearchScreenState extends State<SearchScreen> {
                   style: const TextStyle(
                     fontSize: 20.0,
                   ),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Search by author or title',
-                    hintStyle: const TextStyle(
+                    hintStyle: TextStyle(
                       fontSize: 20.0,
                       color: kPrimaryBlue,
                     ),
-                    icon: IconButton(
-                      onPressed: () async {
-                        if (_searchController.text.isNotEmpty) {
-                          await paperProvider
-                              .searchForPapers(_searchController.text.trim());
-                          if (paperProvider.searchResults.isNotEmpty) {
-                            Navigator.pop(context);
-                            widget.onPop(true);
-                          }
-                        }
-                      },
-                      icon: const Icon(
-                        Icons.search,
-                        color: kPrimaryBlue,
-                      ),
+                    icon: Icon(
+                      Icons.search,
+                      color: kPrimaryBlue,
                     ),
                     enabledBorder: InputBorder.none,
                     focusedBorder: InputBorder.none,
@@ -93,6 +83,32 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ],
             ),
+          ),
+          const SizedBox(height: 15.0),
+          ReusableButton(
+            text: _searching ? 'SEARCHING...' : 'SEARCH',
+            onTap: _searching
+                ? () {}
+                : () async {
+                    if (_searchController.text.isNotEmpty) {
+                      setState(
+                        () {
+                          _searching = true;
+                        },
+                      );
+                      await paperProvider
+                          .searchForPapers(_searchController.text.trim());
+                      setState(
+                        () {
+                          _searching = false;
+                        },
+                      );
+                      if (paperProvider.searchResults.isNotEmpty) {
+                        Navigator.pop(context);
+                        widget.onPop(true);
+                      }
+                    }
+                  },
           ),
         ],
       ),
