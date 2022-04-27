@@ -21,7 +21,7 @@ class StatService {
           .collection('users')
           .doc(_auth.currentUser?.email)
           .get();
-      return doubleToInt(data.data()?['timeSpent'] / 360);
+      return ((data.data()?['timeSpent'] ?? 0) / 60).toInt();
     } catch (e) {
       return -1;
     }
@@ -73,6 +73,4 @@ class StatService {
       return -1;
     }
   }
-
-  int doubleToInt(double number) => number.toInt();
 }
