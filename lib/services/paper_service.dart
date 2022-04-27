@@ -26,19 +26,17 @@ class PaperService {
     }
   }
 
-  getBookmarks() async {
+  Future<List<Paper>> getBookmarks() async {
     try {
-      await _firestore
+      var list = await _firestore
           .collection('users')
           .doc(_auth.currentUser?.email ?? '')
           .collection('bookmarks')
-          .get()
-          .then(
-        (list) {
-          return list.docs.map((e) => Paper.fromMap(e.data())).toList();
-        },
-      );
-    } catch (_) {}
+          .get();
+      return list.docs.map((e) => Paper.fromMap(e.data())).toList();
+    } catch (_) {
+      return [];
+    }
   }
 
   Future unbookmarkPaper(Paper paper) async {
