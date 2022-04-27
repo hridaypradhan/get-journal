@@ -23,6 +23,7 @@ dependencies:
   http: ^0.13.4
   provider: ^6.0.2
   syncfusion_flutter_pdfviewer: ^20.1.51-beta
+  url_launcher: ^6.1.0
   webfeed: ^0.7.0
 
 dev_dependencies:

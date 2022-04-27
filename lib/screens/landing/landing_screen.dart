@@ -1,13 +1,13 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swipe_button/flutter_swipe_button.dart';
-import '../base/base_screen.dart';
-import '../../services/auth_service.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../global/constants/colors.dart';
 import '../../global/utilities/size_helper.dart';
-import 'widgets/sign_in_button.dart';
+import '../../global/widgets/reusable_button.dart';
+import '../../services/auth_service.dart';
+import '../base/base_screen.dart';
 
 class LandingScreen extends StatefulWidget {
   static const id = '/landing_screen';
@@ -20,6 +20,7 @@ class LandingScreen extends StatefulWidget {
 
 class _LandingScreenState extends State<LandingScreen> {
   late Widget _toDisplay;
+  final AuthService _authService = AuthService();
 
   @override
   void didChangeDependencies() {
@@ -107,7 +108,20 @@ class _LandingScreenState extends State<LandingScreen> {
                         ),
                       ),
                       const SizedBox(height: 30.0),
-                      SignInButton(),
+                      ReusableButton(
+                        text: 'Sign In',
+                        onTap: () async {
+                          _authService.signInWithGoogle(() {}).then(
+                            (loggedInUser) {
+                              if (loggedInUser.user != null) {
+                                _authService.writeUserData();
+                                Navigator.popAndPushNamed(
+                                    context, BaseScreen.id);
+                              }
+                            },
+                          );
+                        },
+                      ),
                     ],
                   );
                 },

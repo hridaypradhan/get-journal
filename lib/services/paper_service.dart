@@ -64,8 +64,6 @@ class PaperService {
           .set(
             paper.toMap(),
           );
-    } catch (e) {
-      print(e);
-    }
+    } catch (_) {}
   }
 }
