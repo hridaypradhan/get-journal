@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get_journal/global/widgets/reusable_button.dart';
+import '../../global/widgets/reusable_button.dart';
 import 'package:provider/provider.dart';
 
 import '../../global/constants/colors.dart';

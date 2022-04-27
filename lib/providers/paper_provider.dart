@@ -7,7 +7,7 @@ class PaperProvider extends ChangeNotifier {
   final PaperService _paperService = PaperService();
 
   List<Paper> _searchResults = [], _bookmarkedPapers = [];
-  bool _bookmarksOn = false;
+  bool _bookmarksOn = true;
 
   checkIfBookmarked(Paper paper) {
     for (Paper bookmark in _bookmarkedPapers) {

@@ -38,8 +38,8 @@ class AuthService {
         {
           'name': _auth.currentUser?.displayName,
           'email': _auth.currentUser?.email,
-          'phoneNumber': _auth.currentUser?.phoneNumber,
           'photoUrl': _auth.currentUser?.photoURL,
+          'joiningDate': DateTime.now(),
         },
       );
     }

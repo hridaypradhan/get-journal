@@ -38,8 +38,8 @@ class _BaseScreenState extends State<BaseScreen> {
                   size: 30.0,
                 ),
                 title: const Text('Home'),
-                activeColor: Colors.white,
-                inactiveColor: Colors.white,
+                activeColor: kLightGreen,
+                inactiveColor: kLightBlue,
               ),
               BottomBarItem(
                 icon: const Icon(
@@ -47,8 +47,8 @@ class _BaseScreenState extends State<BaseScreen> {
                   size: 30.0,
                 ),
                 title: const Text('Search'),
-                activeColor: Colors.white,
-                inactiveColor: Colors.white,
+                activeColor: kLightGreen,
+                inactiveColor: kLightBlue,
               ),
               BottomBarItem(
                 icon: const Icon(
@@ -56,8 +56,8 @@ class _BaseScreenState extends State<BaseScreen> {
                   size: 30.0,
                 ),
                 title: const Text('Profile'),
-                activeColor: Colors.white,
-                inactiveColor: Colors.white,
+                activeColor: kLightGreen,
+                inactiveColor: kLightBlue,
               ),
             ],
             onTap: (index) {

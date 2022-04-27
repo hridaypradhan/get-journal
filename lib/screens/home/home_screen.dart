@@ -34,6 +34,7 @@ class HomeScreen extends StatelessWidget {
           child: Builder(
             builder: (context) {
               if (paperProvider.bookmarksOn) {
+                paperProvider.updateBookmarks();
                 return paperProvider.bookmarkedPapers.isEmpty
                     ? const Center(
                         child: Padding(

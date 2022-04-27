@@ -111,12 +111,17 @@ class _LandingScreenState extends State<LandingScreen> {
                       ReusableButton(
                         text: 'Sign In',
                         onTap: () async {
-                          _authService.signInWithGoogle(() {}).then(
+                          await _authService.signInWithGoogle(() {}).then(
                             (loggedInUser) {
                               if (loggedInUser.user != null) {
-                                _authService.writeUserData();
+                                if (loggedInUser
+                                    .additionalUserInfo!.isNewUser) {
+                                  _authService.writeUserData();
+                                }
                                 Navigator.popAndPushNamed(
-                                    context, BaseScreen.id);
+                                  context,
+                                  BaseScreen.id,
+                                );
                               }
                             },
                           );

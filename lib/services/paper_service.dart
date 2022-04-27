@@ -58,9 +58,11 @@ class PaperService {
           .collection('users')
           .doc(_auth.currentUser?.email)
           .collection('bookmarks')
-          .doc(paper.id
-              .substring(paper.id.lastIndexOf('/') + 1)
-              .replaceAll('.', ''))
+          .doc(
+            paper.id
+                .substring(paper.id.lastIndexOf('/') + 1)
+                .replaceAll('.', ''),
+          )
           .set(
             paper.toMap(),
           );

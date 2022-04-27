@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'widgets/stats_popup.dart';
+import '../../services/stat_service.dart';
 
 import '../../global/constants/colors.dart';
 import '../../services/auth_service.dart';
@@ -33,25 +35,33 @@ class ProfileScreen extends StatelessWidget {
                       color: kPrimaryBlue,
                       thickness: 1.5,
                     ),
-                    RichText(
-                      textAlign: TextAlign.center,
-                      text: const TextSpan(
-                        style: TextStyle(
-                          color: kPrimaryBlue,
-                          fontSize: 30.0,
-                        ),
-                        text: 'Joined',
-                        children: [
-                          TextSpan(
-                            text: '\n6 months ago',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: kPrimaryBlue,
+                    FutureBuilder<int>(
+                        future: StatService().getDaysSinceJoining(),
+                        builder: (context, snapshot) {
+                          return RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
+                              style: const TextStyle(
+                                color: kPrimaryBlue,
+                                fontSize: 30.0,
+                              ),
+                              text: 'Joined',
+                              children: [
+                                TextSpan(
+                                  text: '\n' +
+                                      (snapshot.hasData
+                                          ? snapshot.data.toString()
+                                          : '...') +
+                                      ' day (s) ago',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: kPrimaryBlue,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
+                          );
+                        }),
                   ],
                 ),
               ),
@@ -97,7 +107,13 @@ class ProfileScreen extends StatelessWidget {
               size: 50.0,
             ),
             text: 'Stats',
-            action: () {},
+            action: () {
+              showModalBottomSheet(
+                context: context,
+                backgroundColor: Colors.transparent,
+                builder: (context) => StatsPopup(),
+              );
+            },
           ),
           ProfileAction(
             leadingIcon: Icons.bookmark_added,
