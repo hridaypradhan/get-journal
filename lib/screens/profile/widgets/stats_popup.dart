@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../services/stat_service.dart';
 
 import '../../../global/constants/colors.dart';
+import '../../../services/stat_service.dart';
 
 class StatsPopup extends StatelessWidget {
   final StatService _statService = StatService();

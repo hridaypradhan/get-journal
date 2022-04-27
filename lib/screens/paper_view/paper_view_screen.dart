@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import '../../services/stat_service.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../global/widgets/reusable_button.dart';
+import '../../services/stat_service.dart';
 
 class PaperViewScreen extends StatefulWidget {
   final String pdfLink;

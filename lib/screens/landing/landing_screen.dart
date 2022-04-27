@@ -28,15 +28,14 @@ class _LandingScreenState extends State<LandingScreen> {
     _toDisplay = Column(
       key: const ValueKey<int>(1),
       children: [
-        const SizedBox(height: 40.0),
-        SizedBox(
-          // TODO Remove hardcoded values
-          height: 60.0,
-          width: 300.0,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              DefaultTextStyle(
+        const SizedBox(height: 20.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(
+              height: 50.0,
+              width: 150.0,
+              child: DefaultTextStyle(
                 style: TextStyle(
                   fontSize: 45.0,
                   fontFamily: GoogleFonts.spartan().fontFamily,
@@ -52,16 +51,16 @@ class _LandingScreenState extends State<LandingScreen> {
                   ],
                 ),
               ),
-              const SizedBox(width: 10.0),
-              const Text(
-                'papers.',
-                style: TextStyle(
-                  fontSize: 45.0,
-                  fontWeight: FontWeight.bold,
-                ),
+            ),
+            const SizedBox(width: 5.0),
+            const Text(
+              'papers.',
+              style: TextStyle(
+                fontSize: 45.0,
+                fontWeight: FontWeight.bold,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
         const Text(
           'All in one place.',
@@ -149,7 +148,7 @@ class _LandingScreenState extends State<LandingScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              const SizedBox(height: 20.0),
+              // const SizedBox(height: 20.0),
               Image.asset(
                 'images/landing_page_image.png',
                 height: SizeHelper(context).height * 0.4,
