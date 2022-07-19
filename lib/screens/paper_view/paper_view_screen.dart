@@ -34,12 +34,12 @@ class _PaperViewScreenState extends State<PaperViewScreen>
       const Duration(seconds: 1),
       (timer) => _seconds++,
     );
-    WidgetsBinding.instance?.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void dispose() {
-    WidgetsBinding.instance?.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     _timer.cancel();
     _statService.updateTimeSpent(_seconds);
     _seconds = 0;
